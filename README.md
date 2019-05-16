@@ -7,6 +7,12 @@
 Image Source: [Pixabay](https://cdn.pixabay.com/photo/2018/08/31/08/35/doodle-3644073_960_720.png)
 
 
+### Features
+
+1. Search the newbies who has posts recently under the #cn tag, and reply their posts with the welcome message and suggestions;
+2. Summarize the daily statistics of interaction with newbies, and publish summary of the efforts in recent days.
+
+
 ### Installation
 
 The python packages in this project is managed with `pipenv` so you need to run below commands to install the packages before run the relevant commands.
