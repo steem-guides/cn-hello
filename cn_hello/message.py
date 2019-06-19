@@ -112,7 +112,9 @@ MESSAGES["daily_summary"] = """
 
 
 MESSAGES["weekly_summary"] = """
+<center>
 <img src="https://cdn.pixabay.com/photo/2016/10/20/23/52/weekend-1756858_960_720.jpg" alt="" /><br/> (Image Source  <a href="https://cdn.pixabay.com/photo/2016/10/20/23/52/weekend-1756858_960_720.jpg">Pixabay</a>)
+</center>
 
 在下 @cn-hello 是新手村 @team-cn 的接引小门童，为各位初来乍到的朋友指路。
 
@@ -143,6 +145,6 @@ MESSAGES["weekly_summary"] = """
 本文的统计结果用于帮助社区里的伙伴们了解每周用 #cn 标签发帖的新人的情况。
 后续可能加入更多统计信息。
 
-如有任何疑问，请联系 @cn-hello
+如有任何疑问或建议，请联系 @cn-hello
 
 """
