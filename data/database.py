@@ -67,7 +67,8 @@ class SteemDatabase:
     def has_reply(self, receiver, message_id):
         return self._replies().find_one({"receiver": receiver, "message_id": message_id}) is not None
 
-    def get_replies(self, message_id, days):
-        return self._replies().find({"message_id": message_id, "updated": {"$gte": days_ago(days)}})
-
-
+    def get_replies(self, message_id, days=None):
+        if days is not None:
+            return self._replies().find({"message_id": message_id, "updated": {"$gte": days_ago(days)}})
+        else:
+            return self._replies().find({"message_id": message_id})

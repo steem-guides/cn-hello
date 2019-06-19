@@ -3,6 +3,7 @@
 import time
 from datetime import datetime
 import pytz
+import os
 
 from steem.comment import SteemComment
 from steem.account import SteemAccount
@@ -13,6 +14,7 @@ from steem.settings import settings, STEEM_HOST, STEEMD_HOST
 from data.reader import SteemReader
 from cn_hello.newbies import Newbies
 from cn_hello.message import get_message, verify_message, build_table
+from cn_hello.analysis import draw_weekly_data, draw_quarterly_data, draw_all_data
 from utils.logging.logger import logger
 
 
@@ -21,7 +23,8 @@ CN_HELLO_ACCOUNT = settings.get_env_var("CN_HELLO_ACCOUNT") or "cn-hello"
 VOTE_WEIGHT = settings.get_env_var("CN_HELLO_VOTE_WEIGHT") or 50
 
 SUMMARY_POST_TAGS = ["cn", "cn-hello", "cn-stats"]
-SUMMARY_PREFIX = "CN区每日新人统计"
+DAILY_SUMMARY_PREFIX = "CN区每日新人统计"
+WEEKLY_SUMMARY_PREFIX = "CN区每周新人数据汇总"
 
 ACCESSIBLE_STEEM_HOST = "https://busy.org"
 
@@ -164,8 +167,8 @@ class CnHelloBot(SteemReader):
     def _get_replies(self, message_id, days):
         return list(self.db.get_replies(message_id, days))
 
-    def _has_published(self, title):
-        posts = get_posts(account=self.author, keyword=SUMMARY_PREFIX, limit=10)
+    def _has_published(self, title, keyword):
+        posts = get_posts(account=self.author, keyword=keyword, limit=10)
         if len(posts) > 0:
             for post in posts:
                 if post.title == title:
@@ -212,10 +215,10 @@ class CnHelloBot(SteemReader):
                                               articles_table=articles_table,
                                               stats_table=stats_table)
 
-    def publish(self):
-        """ publish the statistics post about newbies """
-        title = "{} {}".format(SUMMARY_PREFIX, self._get_time_str())
-        if not self._has_published(title):
+    def publich_daily_stats(self):
+        """ publish the daily statistics post about newbies """
+        title = "{} {}".format(DAILY_SUMMARY_PREFIX, self._get_time_str())
+        if not self._has_published(title, DAILY_SUMMARY_PREFIX):
             body = self._get_daily_blog_body("daily_summary")
             self.writer.post(title, body, SUMMARY_POST_TAGS)
             logger.info("I have published today's post [{}] successfully".format(title))
@@ -224,3 +227,38 @@ class CnHelloBot(SteemReader):
             logger.info("Skip this post [{}], because I already published the post with the same title".format(title))
             return False
 
+    def _get_weekly_blog_body(self, message_id):
+        delta = 0.05
+        weekly_replies = self._get_replies("welcome", 7.0 - delta) # 7 days
+        quarterly_replies = self._get_replies("welcome", 90.0 - delta) # 90 days
+        all_replies = self._get_replies("welcome", 365.0 - delta) # 365 days
+
+        weekly_total = len(weekly_replies)
+        quarterly_total = len(quarterly_replies)
+        total = len(all_replies)
+
+        print (weekly_total, quarterly_total, total)
+
+        pic_weekly = draw_weekly_data(weekly_replies, os.path.join(self.folder, "weekly.png"))
+        pic_quarterly = draw_quarterly_data(quarterly_replies, os.path.join(self.folder, "quarterly.png"))
+        pic_all = draw_all_data(all_replies, os.path.join(self.folder, "all.png"))
+
+        return get_message(message_id).format(total=total,
+                                              weekly_total=weekly_total,
+                                              quarterly_total=quarterly_total,
+                                              weekly_graph=pic_weekly,
+                                              quarterly_graph=pic_quarterly,
+                                              all_graph=pic_all)
+
+    def publich_weekly_stats(self):
+        """ publish the weekly statistics post about newbies """
+        title = "{} {}".format(WEEKLY_SUMMARY_PREFIX, self._get_time_str())
+        if not self._has_published(title, WEEKLY_SUMMARY_PREFIX):
+            body = self._get_weekly_blog_body("weekly_summary")
+            print (body)
+            self.writer.post(title, body, SUMMARY_POST_TAGS)
+            logger.info("I have published this week's post [{}] successfully".format(title))
+            return True
+        else:
+            logger.info("Skip this post [{}], because I already published the post with the same title".format(title))
+            return False

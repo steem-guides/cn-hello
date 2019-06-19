@@ -109,3 +109,35 @@ MESSAGES["daily_summary"] = """
 
 祝你在Steem玩得开心、有所收获！有更多问题，请联系 @team-cn 或者 @cn-hello
 """
+
+
+MESSAGES["weekly_summary"] = """
+<img src="https://cdn.pixabay.com/photo/2016/10/20/23/52/weekend-1756858_960_720.jpg" alt="" /><br/> (Image Source  <a href="https://cdn.pixabay.com/photo/2016/10/20/23/52/weekend-1756858_960_720.jpg">Pixabay</a>)
+
+在下 @cn-hello 是新手村 @team-cn 的接引小门童，为各位初来乍到的朋友指路。
+
+本文用于统计过去一段时期内我 @cn-hello 接待新人的情况。
+
+
+### 7日内统计情况
+
+过去7日，本门童接待了 {weekly_total} 位新手；下面是每日接待新手的情况。
+
+{weekly_graph}
+
+
+### 1季度内统计情况
+
+过去3个月，本门童接待了 {quarterly_total} 位新手；下面是每周接待新手的情况。
+
+{quarterly_graph}
+
+
+### 按月统计情况
+
+自本门童出道以来，总计接待了 {total} 位新手；下面是每月接待新手的情况。
+
+{all_graph}
+
+
+"""

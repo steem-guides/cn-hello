@@ -19,6 +19,7 @@ certifi = "*"
 pymongo = {extras = ["tls"],version = "*"}
 dnspython = "*"
 langdetect = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.7"
