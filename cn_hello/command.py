@@ -1,9 +1,11 @@
 # -*- coding:utf-8 -*-
 
-import os, time, random
+import os, time, datetime, random
 from invoke import task
 
 from steem.settings import settings
+from utils.logging.logger import logger
+
 from cn_hello.bot import CnHelloBot
 
 
@@ -16,7 +18,7 @@ def search(ctx, tag="cn", days=3.0, debug=False):
     """ search the latest posts by newbies"""
 
     if debug:
-      settings.set_debug_mode()
+        settings.set_debug_mode()
 
     settings.set_steem_node()
 
@@ -37,7 +39,7 @@ def reply(ctx, url, message_id="welcome", debug=False):
     """ reply to a post by cn-hello """
 
     if debug:
-      settings.set_debug_mode()
+        settings.set_debug_mode()
 
     settings.set_steem_node()
 
@@ -52,7 +54,7 @@ def vote(ctx, url, debug=False):
     """ vote a post by cn-hello """
 
     if debug:
-      settings.set_debug_mode()
+        settings.set_debug_mode()
 
     settings.set_steem_node()
 
@@ -69,7 +71,7 @@ def welcome(ctx, tag="cn", days=3.0, debug=False):
     """ send welcome messages to newbies """
 
     if debug:
-      settings.set_debug_mode()
+        settings.set_debug_mode()
 
     settings.set_steem_node()
 
@@ -83,14 +85,37 @@ def welcome(ctx, tag="cn", days=3.0, debug=False):
 @task(help={
       'debug': 'enable the debug mode'
       })
-def summarize(ctx, tag="cn", days=7.0, debug=False):
+def daily_stats(ctx, tag="cn", days=7.0, debug=False):
     """ publish summary post for daily and weekly update """
 
     if debug:
-      settings.set_debug_mode()
+        settings.set_debug_mode()
 
     settings.set_steem_node()
 
     bot = CnHelloBot(tag=tag, days=days)
-    bot.publish()
+    bot.publish_daily_stats()
+
+
+@task(help={
+      'debug': 'enable the debug mode'
+      })
+def weekly_stats(ctx, tag="cn", days=7.0, debug=False):
+    """ publish weekly stats of cn-hello """
+
+    if debug:
+        settings.set_debug_mode()
+
+    settings.set_steem_node()
+
+    day_of_the_week = datetime.datetime.today().weekday()
+
+    # only Sunday
+    if day_of_the_week == 6:
+        logger.info("Create the weekly summary")
+        bot = CnHelloBot(tag=tag, days=days)
+        bot.publish_weekly_stats()
+    else:
+        logger.info("Skip the weekly summary until its Sunday")
+
 
