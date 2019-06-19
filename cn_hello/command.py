@@ -110,6 +110,7 @@ def weekly_stats(ctx, tag="cn", days=7.0, debug=False):
 
     day_of_the_week = datetime.datetime.today().weekday()
 
+    # only Sunday
     if day_of_the_week == 6:
         logger.info("Create the weekly summary")
         bot = CnHelloBot(tag=tag, days=days)
