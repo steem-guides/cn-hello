@@ -9,6 +9,7 @@ from steem.comment import SteemComment
 from steem.account import SteemAccount
 from steem.writer import Writer
 from steem.voter import Voter
+from steem.uploader import Uploader
 from steem.collector import get_comments, get_posts
 from steem.settings import settings, STEEM_HOST, STEEMD_HOST
 from data.reader import SteemReader
@@ -42,6 +43,7 @@ class CnHelloBot(SteemReader):
         self.writer = Writer(author=self.author)
         self.voter = Voter(author=self.author
                            )
+        self.uploader = Uploader(author=self.author)
         self.newbies = Newbies()
         self.db = settings.get_db()
         self.comments = []
@@ -227,6 +229,14 @@ class CnHelloBot(SteemReader):
             logger.info("Skip this post [{}], because I already published the post with the same title".format(title))
             return False
 
+    def _get_img_md(self, path):
+        if path and len(path) > 0:
+            url = self.uploader.upload(path)
+            if url and len(url) > 0:
+                name = os.path.split(path)[-1]
+                return "![{}]({})".format(name, url)
+        return ""
+
     def _get_weekly_blog_body(self, message_id):
         delta = 0.05
         weekly_replies = self._get_replies("welcome", 7.0 - delta) # 7 days
@@ -243,19 +253,22 @@ class CnHelloBot(SteemReader):
         pic_quarterly = draw_quarterly_data(quarterly_replies, os.path.join(self.folder, "quarterly.png"))
         pic_all = draw_all_data(all_replies, os.path.join(self.folder, "all.png"))
 
+        weekly_graph = self._get_img_md(pic_weekly)
+        quarterly_graph = self._get_img_md(pic_quarterly)
+        all_graph = self._get_img_md(pic_all)
+
         return get_message(message_id).format(total=total,
                                               weekly_total=weekly_total,
                                               quarterly_total=quarterly_total,
-                                              weekly_graph=pic_weekly,
-                                              quarterly_graph=pic_quarterly,
-                                              all_graph=pic_all)
+                                              weekly_graph=weekly_graph,
+                                              quarterly_graph=quarterly_graph,
+                                              all_graph=all_graph)
 
     def publich_weekly_stats(self):
         """ publish the weekly statistics post about newbies """
         title = "{} {}".format(WEEKLY_SUMMARY_PREFIX, self._get_time_str())
         if not self._has_published(title, WEEKLY_SUMMARY_PREFIX):
             body = self._get_weekly_blog_body("weekly_summary")
-            print (body)
             self.writer.post(title, body, SUMMARY_POST_TAGS)
             logger.info("I have published this week's post [{}] successfully".format(title))
             return True

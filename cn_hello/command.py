@@ -110,11 +110,11 @@ def weekly_stats(ctx, tag="cn", days=7.0, debug=False):
 
     day_of_the_week = datetime.datetime.today().weekday()
 
-    if day_of_the_week == 2:
+    if day_of_the_week == 6:
         logger.info("Create the weekly summary")
         bot = CnHelloBot(tag=tag, days=days)
         bot.publich_weekly_stats()
     else:
-        logger.info("Skip the weekly summary until its Saturday")
+        logger.info("Skip the weekly summary until its Sunday")
 
 
