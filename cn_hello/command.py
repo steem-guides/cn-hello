@@ -94,7 +94,7 @@ def daily_stats(ctx, tag="cn", days=7.0, debug=False):
     settings.set_steem_node()
 
     bot = CnHelloBot(tag=tag, days=days)
-    bot.publish()
+    bot.publish_daily_stats()
 
 
 @task(help={
@@ -114,7 +114,7 @@ def weekly_stats(ctx, tag="cn", days=7.0, debug=False):
     if day_of_the_week == 6:
         logger.info("Create the weekly summary")
         bot = CnHelloBot(tag=tag, days=days)
-        bot.publich_weekly_stats()
+        bot.publish_weekly_stats()
     else:
         logger.info("Skip the weekly summary until its Sunday")
 

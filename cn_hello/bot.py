@@ -217,7 +217,7 @@ class CnHelloBot(SteemReader):
                                               articles_table=articles_table,
                                               stats_table=stats_table)
 
-    def publich_daily_stats(self):
+    def publish_daily_stats(self):
         """ publish the daily statistics post about newbies """
         title = "{} {}".format(DAILY_SUMMARY_PREFIX, self._get_time_str())
         if not self._has_published(title, DAILY_SUMMARY_PREFIX):
@@ -264,7 +264,7 @@ class CnHelloBot(SteemReader):
                                               quarterly_graph=quarterly_graph,
                                               all_graph=all_graph)
 
-    def publich_weekly_stats(self):
+    def publish_weekly_stats(self):
         """ publish the weekly statistics post about newbies """
         title = "{} {}".format(WEEKLY_SUMMARY_PREFIX, self._get_time_str())
         if not self._has_published(title, WEEKLY_SUMMARY_PREFIX):
