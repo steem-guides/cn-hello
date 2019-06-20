@@ -24,8 +24,8 @@ CN_HELLO_ACCOUNT = settings.get_env_var("CN_HELLO_ACCOUNT") or "cn-hello"
 VOTE_WEIGHT = settings.get_env_var("CN_HELLO_VOTE_WEIGHT") or 50
 
 SUMMARY_POST_TAGS = ["cn", "cn-hello", "cn-stats"]
-DAILY_SUMMARY_PREFIX = "CN区每日新人统计"
-WEEKLY_SUMMARY_PREFIX = "CN区每周新人数据汇总"
+DAILY_SUMMARY_PREFIX = "CN区每日新人统计 Newbies Daily"
+WEEKLY_SUMMARY_PREFIX = "CN区每周新人数据汇总 Newbies Weekly"
 
 ACCESSIBLE_STEEM_HOST = "https://busy.org"
 
