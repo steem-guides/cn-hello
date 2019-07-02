@@ -23,7 +23,7 @@ CN_HELLO_REVIEW_DURACTION = 3 # days
 CN_HELLO_ACCOUNT = settings.get_env_var("CN_HELLO_ACCOUNT") or "cn-hello"
 VOTE_WEIGHT = settings.get_env_var("CN_HELLO_VOTE_WEIGHT") or 50
 
-SUMMARY_POST_TAGS = ["cn", "cn-hello", "cn-stats", "zzan"]
+SUMMARY_POST_TAGS = ["cn", "cn-hello", "cn-stats", "newbie", "zzan"]
 DAILY_SUMMARY_PREFIX = "CN区每日新人统计 Newbies Daily"
 WEEKLY_SUMMARY_PREFIX = "CN区每周新人数据汇总 Newbies Weekly"
 
