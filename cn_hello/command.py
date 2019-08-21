@@ -3,7 +3,7 @@
 import os, time, datetime, random
 from invoke import task
 
-from steem.settings import settings
+from steem.settings import settings, STEEM_API_NODES
 from utils.logging.logger import logger
 
 from cn_hello.bot import CnHelloBot
@@ -91,7 +91,7 @@ def daily_stats(ctx, tag="cn", days=7.0, debug=False):
     if debug:
         settings.set_debug_mode()
 
-    settings.set_steem_node()
+    settings.set_steem_node(STEEM_API_NODES[4], condenser=True)
 
     bot = CnHelloBot(tag=tag, days=days)
     bot.publish_daily_stats()
@@ -106,7 +106,7 @@ def weekly_stats(ctx, tag="cn", days=7.0, debug=False):
     if debug:
         settings.set_debug_mode()
 
-    settings.set_steem_node()
+    settings.set_steem_node(STEEM_API_NODES[4], condenser=True)
 
     day_of_the_week = datetime.datetime.today().weekday()
 

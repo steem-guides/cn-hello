@@ -172,7 +172,9 @@ class CnHelloBot(SteemReader):
         return list(self.db.get_replies(message_id, days))
 
     def _has_published(self, title, keyword):
+        settings.set_steem_node(STEEM_API_NODES[4], overwrite=True, condenser=True)
         posts = get_posts(account=self.author, keyword=keyword, limit=10)
+        settings.set_steem_node(STEEM_API_NODES[4], overwrite=True, condenser=False)
         if len(posts) > 0:
             for post in posts:
                 if post.title == title:
