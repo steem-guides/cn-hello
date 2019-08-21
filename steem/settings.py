@@ -58,7 +58,7 @@ class Settings:
                 self.steem_db_inst = SteemDatabase(PRODUCTION_DATABASE)
         return self.steem_db_inst
 
-    def set_steem_node(self, node=None, overwrite=False):
+    def set_steem_node(self, node=None, overwrite=False, condenser=True):
         if self.steem_instance is None or overwrite:
             # print(shared_steem_instance().get_config())
             api_node = node or self.get_env_var('API_NODE') or STEEM_API_NODES[1]
@@ -68,7 +68,7 @@ class Settings:
                 node=api_node,
                 # bundle=True, # Enable bundle broadcast
                 # nobroadcast=True, # Enable this for testing
-                use_condenser=True,
+                use_condenser=condenser,
                 keys=self._get_steem_keys(),
             )
             # Set stm as shared instance
