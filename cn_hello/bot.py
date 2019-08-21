@@ -69,7 +69,7 @@ class CnHelloBot(SteemReader):
         if len(self.comments) == 0:
             settings.set_steem_node(STEEM_API_NODES[1], overwrite=True)
             self.comments = get_comments(self.author)
-            settings.set_steem_node(STEEM_API_NODES[2], overwrite=True)
+            settings.set_steem_node(STEEM_API_NODES[4], overwrite=True)
         return self.comments
 
     def _add_reply_record(self, receiver, message_id, post, timestamp=None):
