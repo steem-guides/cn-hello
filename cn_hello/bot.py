@@ -11,7 +11,7 @@ from steem.writer import Writer
 from steem.voter import Voter
 from steem.uploader import Uploader
 from steem.collector import get_comments, get_posts
-from steem.settings import settings, STEEM_HOST, STEEMD_HOST
+from steem.settings import settings, STEEM_HOST, STEEMD_HOST, STEEM_API_NODES
 from data.reader import SteemReader
 from cn_hello.newbies import Newbies
 from cn_hello.message import get_message, verify_message, build_table
@@ -67,7 +67,9 @@ class CnHelloBot(SteemReader):
 
     def _read_comments(self):
         if len(self.comments) == 0:
+            settings.set_steem_node(STEEM_API_NODES[1], overwrite=True)
             self.comments = get_comments(self.author)
+            settings.set_steem_node(STEEM_API_NODES[2], overwrite=True)
         return self.comments
 
     def _add_reply_record(self, receiver, message_id, post, timestamp=None):
