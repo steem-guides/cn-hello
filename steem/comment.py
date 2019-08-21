@@ -106,8 +106,12 @@ class SteemComment:
         return account in commented_by
 
     def is_upvoted_by(self, account):
-        voters = self.get_comment().get_curation_rewards()['active_votes'].keys()
-        return account in voters
+        has_upvoted = False
+        for vote in self.get_comment().get_votes():
+            if vote.voter == account and float(vote.percent) > 0:
+                has_upvoted = True
+        return has_upvoted
+
 
     def is_downvoted_by(self, account):
         has_downvoted = False
