@@ -6,7 +6,7 @@ import json
 
 from beem.account import Account
 from beem.comment import Comment
-from beem.discussions import Query, Discussions_by_created
+from beem.discussions import Query, Discussions_by_created, Discussions_by_comments
 
 from steem.comment import SteemComment
 from steem.settings import settings
@@ -172,11 +172,39 @@ class SteemCommentsByAccount:
         self.days = float(days) if days else None
         self.total = None
 
+    def get_comments(self):
+        start_permlink = None
+        limit = self.limit
+        comment_count = 0
+        while True:
+            query_limit = 100
+            if limit is not None:
+                query_limit = min(limit - comment_count + 1, query_limit)
+            query = Query(start_author=self.username,
+                          start_permlink=start_permlink,
+                          limit=query_limit)
+            results = Discussions_by_comments(query)
+            if len(results) == 0 or (start_permlink and len(results) == 1):
+                return
+            if comment_count > 0 and start_permlink:
+                results = results[1:]  # strip duplicates from previous iteration
+            for comment in results:
+                if comment["permlink"] == '':
+                    continue
+                comment_count += 1
+                yield comment
+                start_permlink = comment['permlink']
+                if comment_count == limit:
+                    return
+
     def read_comments(self):
         c_list = {}
         comments = []
 
-        comment_history = self.account.comment_history(limit=self.limit)
+        # comment_history = self.account.comment_history(limit=self.limit)
+        # query = Query(start_author=self.username, limit=self.limit)
+        # comment_history = Discussions_by_comments(query)
+        comment_history = self.get_comments()
 
         days_done = False
         for c in comment_history:
