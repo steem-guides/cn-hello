@@ -67,7 +67,7 @@ class CnHelloBot(SteemReader):
 
     def _read_comments(self):
         if len(self.comments) == 0:
-            settings.set_steem_node(STEEM_API_NODES[1], overwrite=True)
+            # settings.set_steem_node(STEEM_API_NODES[1], overwrite=True)
             self.comments = get_comments(self.author)
             settings.set_steem_node(STEEM_API_NODES[4], overwrite=True, condenser=False)
         return self.comments
