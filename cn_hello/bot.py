@@ -29,6 +29,7 @@ WEEKLY_SUMMARY_PREFIX = "CN区每周新人数据汇总 Newbies Weekly"
 
 ACCESSIBLE_STEEM_HOST = "https://busy.org"
 
+CURRENT_API_NODE = settings.get_env_var('API_NODE') or STEEM_API_NODES[4]
 
 
 class CnHelloBot(SteemReader):
@@ -69,7 +70,7 @@ class CnHelloBot(SteemReader):
         if len(self.comments) == 0:
             # settings.set_steem_node(STEEM_API_NODES[1], overwrite=True)
             self.comments = get_comments(self.author)
-            settings.set_steem_node(STEEM_API_NODES[4], overwrite=True, condenser=False)
+            settings.set_steem_node(CURRENT_API_NODE, overwrite=True, condenser=False)
         return self.comments
 
     def _add_reply_record(self, receiver, message_id, post, timestamp=None):
@@ -172,9 +173,9 @@ class CnHelloBot(SteemReader):
         return list(self.db.get_replies(message_id, days))
 
     def _has_published(self, title, keyword):
-        settings.set_steem_node(STEEM_API_NODES[4], overwrite=True, condenser=True)
+        settings.set_steem_node(CURRENT_API_NODE, overwrite=True, condenser=True)
         posts = get_posts(account=self.author, keyword=keyword, limit=10)
-        settings.set_steem_node(STEEM_API_NODES[4], overwrite=True, condenser=False)
+        settings.set_steem_node(CURRENT_API_NODE, overwrite=True, condenser=False)
         if len(posts) > 0:
             for post in posts:
                 if post.title == title:
