@@ -27,7 +27,7 @@ SUMMARY_POST_TAGS = ["cn", "cn-hello", "cn-stats", "newbie", "zzan"]
 DAILY_SUMMARY_PREFIX = "CN区每日新人统计 Newbies Daily"
 WEEKLY_SUMMARY_PREFIX = "CN区每周新人数据汇总 Newbies Weekly"
 
-ACCESSIBLE_STEEM_HOST = "https://busy.org"
+ACCESSIBLE_STEEM_HOST = "https://steem.buzz"
 
 CURRENT_API_NODE = settings.get_env_var('API_NODE') or STEEM_API_NODES[4]
 

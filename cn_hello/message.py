@@ -72,7 +72,7 @@ Steem和其他社区有很多不同，新人在早期经常会面临**各种困�
 为了**解决这些问题**，我们建议：
 
 1. 加入**新手村** @team-cn 参与各种活动与交流，和众多的多才多艺的小伙伴们一起玩耍，加入微信群便于提问和互动。想要加入新手村，可以在 @team-cn 的帖子下留言，或者联系村长 @ericet（微信账号：ericet）；
-1. 阅读[简明的新手攻略](https://busy.org/@ericet/db528bhdn3)，了解新手的基本玩法；如有时间，可以进一步阅读Steem中文社区联合创作的[《Steem指南》](https://steem-guides.github.io/steemh) ([PDF版](https://steem-guides.github.io/steemh/steemh.pdf) / [EPUB版](https://steem-guides.github.io/steemh/steemh.epub)) ，关注 @steem-guides 《Steem指南》，详细了解Steem中的规则、攻略、社交和人物。
+1. 阅读[简明的新手攻略](https://steem.buzz/@ericet/db528bhdn3)，了解新手的基本玩法；如有时间，可以进一步阅读Steem中文社区联合创作的[《Steem指南》](https://steem-guides.github.io/steemh) ([PDF版](https://steem-guides.github.io/steemh/steemh.pdf) / [EPUB版](https://steem-guides.github.io/steemh/steemh.epub)) ，关注 @steem-guides 《Steem指南》，详细了解Steem中的规则、攻略、社交和人物。
 
 最后，再次欢迎你来到Steem中文社区大家庭🎉 ，祝你在Steem的旅程愉快！！！
 
@@ -105,7 +105,7 @@ MESSAGES["daily_summary"] = """
 ### 给新人的建议
 
 1. 加入**新手村** @team-cn 参与各种活动与交流，和CN区的伙伴们一起学习和玩耍，加入微信群参与提问和互动；想要加入新手村，可以在 @team-cn 的帖子下留言，或者联系村长 @ericet；
-1. 阅读[简明的新手攻略](https://busy.org/@ericet/db528bhdn3)，了解新手的基本玩法；如有时间，可以进一步阅读Steem中文社区联合创作的[《Steem指南》](https://steem-guides.github.io/steemh) ([PDF版](https://steem-guides.github.io/steemh/steemh.pdf) / [EPUB版](https://steem-guides.github.io/steemh/steemh.epub)) ，关注 @steem-guides 《Steem指南》，详细了解Steem中的规则、攻略、社交和人物。
+1. 阅读[简明的新手攻略](https://steem.buzz/@ericet/db528bhdn3)，了解新手的基本玩法；如有时间，可以进一步阅读Steem中文社区联合创作的[《Steem指南》](https://steem-guides.github.io/steemh) ([PDF版](https://steem-guides.github.io/steemh/steemh.pdf) / [EPUB版](https://steem-guides.github.io/steemh/steemh.epub)) ，关注 @steem-guides 《Steem指南》，详细了解Steem中的规则、攻略、社交和人物。
 
 祝你在Steem玩得开心、有所收获！有更多问题，请联系 @team-cn 或者 @cn-hello
 """
