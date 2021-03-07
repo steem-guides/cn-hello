@@ -1,6 +1,6 @@
 [[source]]
 name = "pypi.ustc"
-url = "https://pypi.mirrors.ustc.edu.cn/simple"
+url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
